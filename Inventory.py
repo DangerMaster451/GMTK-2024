@@ -41,14 +41,17 @@ class InventorySlot():
             image = self.default_image
 
         if self.block == 0:
-            s = Single(image, 128, self.scale_size)
+            self.surface.blit(image, self.coordinate)
+            return
         elif self.block == 1:
-            s = Short_Line_H(image, 128, self.scale_size)
+            s = Single(image, 128, self.scale_size)
         elif self.block == 2:
-            s = Long_Line_H(image, 128, self.scale_size)
+            s = Short_Line_H(image, 128, self.scale_size)
         elif self.block == 3:
-            s = Short_Line_V(image, 128, self.scale_size)
+            s = Long_Line_H(image, 128, self.scale_size)
         elif self.block == 4:
+            s = Short_Line_V(image, 128, self.scale_size)
+        elif self.block == 5:
             s = Long_Line_V(image, 128, self.scale_size)
 
         s.renderInventory((self.pixel_size - s.pixel_size)/2, (self.pixel_size - s.pixel_size)/2)

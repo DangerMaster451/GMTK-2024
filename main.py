@@ -11,7 +11,7 @@ running = True
 
 gameBoard = Board(720, 3)
 
-blocks = [0,1,2,3,4]
+blocks = [0,1,2,3,4,5]
 inventory = Inventory (720, blocks)
 
 while running:
