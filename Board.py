@@ -8,12 +8,12 @@ class Board(pygame.Surface):
         self.tiles = []
 
         # calculate pixel size of tiles
-        tile_pixel_size = pixel_size/grid_size
+        self.tile_pixel_size = pixel_size/grid_size
 
         # create a list of Tile objects each with an x and y value
         for y in range(0, grid_size):
             for x in range(0, grid_size):
-                t = Tile(self, (x,y), tile_pixel_size)
+                t = Tile(self, (x,y), self.tile_pixel_size)
                 self.tiles.append(t)
 
     def render(self):
@@ -27,7 +27,7 @@ class Tile():
         self.surface = surface
         self.coordinate = coordinate
         self.pixel_size = pixel_size
-        self.image = pygame.transform.scale(pygame.image.load("Assets/Tile.png"), (pixel_size,pixel_size))
+        self.image = pygame.transform.scale(pygame.image.load("Assets/Background.png"), (pixel_size,pixel_size))
 
     def render(self):
         x = self.coordinate[0] * self.pixel_size
