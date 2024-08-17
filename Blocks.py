@@ -1,5 +1,4 @@
 import pygame
-import math
 
 red_tile = pygame.image.load("Assets/red tile.png")
 blue_tile = pygame.image.load("Assets/blue tile.png")

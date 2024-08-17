@@ -19,10 +19,6 @@ class Inventory(pygame.Surface):
 
         #how large the blocks will be in the inventory
     def render(self):
-        self.fill("white")
-        
-
-
         self.blit(self.image, (0, 0))
 
         for x in range(0, min(len(self.blocks), self.block_count)):
