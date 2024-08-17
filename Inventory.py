@@ -10,6 +10,7 @@ class Inventory(pygame.Surface):
         self.inv_tile_count = len(self.blocks)
         self.scale_size = self.size_x/5/self.size_x*1.5
         self.tile_size = size_x/self.inv_tile_count
+        self.selected_tile = None
         
         self.slots = []
 
@@ -30,15 +31,23 @@ class InventorySlot():
         self.pixel_size = pixel_size
         self.default_image = pygame.transform.scale(pygame.image.load("Assets/InventorySlot.png"), (self.pixel_size,self.pixel_size))
         self.hovered_image = pygame.transform.scale(pygame.image.load("Assets/HoverInvSlot.png"), (self.pixel_size,self.pixel_size))
+        self.selected_image = pygame.transform.scale(pygame.image.load("Assets/SelectedInvSlot.png"), (self.pixel_size,self.pixel_size))
+        self.sel_and_hov_image = pygame.transform.scale(pygame.image.load("Assets/SelAndHovInvSlot.png"), (self.pixel_size,self.pixel_size))
         self.index = index
         self.block = block
         self.scale_size = 0.25
 
     def render(self,click):
-        if self.isHovered():
+        if self.isHovered() and self.surface.selected_tile == self.index:
+            image = self.sel_and_hov_image
+        elif self.isHovered():
             image = self.hovered_image
+        elif self.surface.selected_tile == self.index:
+            image = self.selected_image
         else:
             image = self.default_image
+
+        
 
         if self.block == 0:
             pass
@@ -62,7 +71,8 @@ class InventorySlot():
 
         if self.isClicked(click):
             # reset slot
-            self.surface.slots[self.index] = InventorySlot(self.surface, (self.index * self.surface.tile_size, 0), self.surface.tile_size, self.index, 0, self.surface.size_x)
+            #self.surface.slots[self.index] = InventorySlot(self.surface, (self.index * self.surface.tile_size, 0), self.surface.tile_size, self.index, 0, self.surface.size_x)
+            self.surface.selected_tile = self.index
 
 
     def isHovered(self) -> bool:
