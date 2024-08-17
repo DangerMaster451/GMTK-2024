@@ -1,8 +1,7 @@
 import pygame
+import math
 
-from Blocks import Single, Short_Line_H, Long_Line_H, Short_Line_V, Long_Line_V
-
-test = pygame.transform.scale(pygame.image.load("Assets/light blue tile.png"), (32,32))
+from Blocks import *
 
 class Inventory(pygame.Surface):
     def __init__(self, size_x, blocks):
@@ -11,40 +10,59 @@ class Inventory(pygame.Surface):
         self.inv_tile_count = len(self.blocks)
         self.scale_size = self.size_x/5/self.size_x*1.5
         self.tile_size = size_x/self.inv_tile_count
-        self.image = pygame.transform.scale(pygame.image.load("Assets/InventorySlot.png"), (self.tile_size,self.tile_size))
+        
         self.slots = []
 
         pygame.Surface.__init__(self, (size_x, self.tile_size) )
 
         for i in range(self.inv_tile_count):
-            slot = InventorySlot(self, (i * self.tile_size, 0), self.tile_size, i, self.blocks[i])
+            slot = InventorySlot(self, (i * self.tile_size, 0), self.tile_size, i, self.blocks[i], size_x)
             self.slots.append(slot)
 
     def render(self):
         for slot in self.slots: slot.render()
 
 class InventorySlot():
-    def __init__(self, surface:pygame.Surface, coordinate:tuple[int,int], pixel_size:int, index:int, block:int):
+    def __init__(self, surface:pygame.Surface, coordinate:tuple[int,int], pixel_size:int, index:int, block:int, inventory_length:int):
         self.surface = surface
         self.coordinate = coordinate
+        self.real_point = ((1920 - inventory_length)/2 + self.coordinate[0] + pixel_size/2, 820 + pixel_size/2)
         self.pixel_size = pixel_size
-        self.image = pygame.transform.scale(pygame.image.load("Assets/InventorySlot.png"), (pixel_size,pixel_size))
+        self.default_image = pygame.transform.scale(pygame.image.load("Assets/InventorySlot.png"), (self.pixel_size,self.pixel_size))
+        self.hovered_image = pygame.transform.scale(pygame.image.load("Assets/HoverInvSlot.png"), (self.pixel_size,self.pixel_size))
         self.index = index
         self.block = block
         self.scale_size = 0.25
 
     def render(self):
+        if self.isHovered():
+            image = self.hovered_image
+        else:
+            image = self.default_image
+
         if self.block == 0:
-            s = Single(self.image, 128, self.scale_size)
+            s = Single(image, 128, self.scale_size)
         elif self.block == 1:
-            s = Short_Line_H(self.image, 128, self.scale_size)
+            s = Short_Line_H(image, 128, self.scale_size)
         elif self.block == 2:
-            s = Long_Line_H(self.image, 128, self.scale_size)
+            s = Long_Line_H(image, 128, self.scale_size)
         elif self.block == 3:
-            s = Short_Line_V(self.image, 128, self.scale_size)
+            s = Short_Line_V(image, 128, self.scale_size)
         elif self.block == 4:
-            s = Long_Line_V(self.image, 128, self.scale_size)
+            s = Long_Line_V(image, 128, self.scale_size)
 
         s.renderInventory((self.pixel_size - s.pixel_size)/2, (self.pixel_size - s.pixel_size)/2)
     
-        self.surface.blit(self.image, self.coordinate)
+        self.surface.blit(image, self.coordinate)
+
+    def isHovered(self) -> bool:
+        if math.sqrt((self.real_point[0] - pygame.mouse.get_pos()[0])**2 + (self.real_point[1] - pygame.mouse.get_pos()[1])**2) < self.pixel_size/2:
+            return True
+        else:
+            return False
+        
+    def isClicked(self, click) -> bool:
+        if self.isHovered() and click:
+            return True
+        else:
+            return False
