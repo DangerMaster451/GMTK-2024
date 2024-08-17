@@ -17,7 +17,6 @@ class Board(pygame.Surface):
                 self.tiles.append(t)
 
     def render(self):
-        self.fill("blue")
         for tile in self.tiles:
             tile.render()
 
@@ -27,7 +26,7 @@ class Tile():
         self.surface = surface
         self.coordinate = coordinate
         self.pixel_size = pixel_size
-        self.image = pygame.transform.scale(pygame.image.load("Assets/Background.png"), (pixel_size,pixel_size))
+        self.image = pygame.transform.scale(pygame.image.load("Assets/stoneTile.png"), (pixel_size,pixel_size))
 
     def render(self):
         x = self.coordinate[0] * self.pixel_size

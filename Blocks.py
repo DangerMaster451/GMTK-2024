@@ -1,6 +1,6 @@
 import pygame
 
-single = pygame.image.load("Assets/redTile.png")
+red = pygame.image.load("Assets/redTile.png")
 
 class Block():
     def __init__(self, surface:pygame.Surface, image:pygame.Surface, pixel_size:int, structure:list[tuple[int,int]]) -> None:
@@ -37,4 +37,21 @@ class Block():
 
 class Single(Block):
     def __init__(self, surface, pixel_size) -> None:
-        super().__init__(surface, single, pixel_size, [(0,0),(0,1),(1,0),(1,1),(0,3)])
+        super().__init__(surface, red, pixel_size, [(0,0)])
+
+class Short_Line_H(Block):
+    def __init__(self, surface, pixel_size) -> None:
+        super().__init__(surface, red, pixel_size, [(0,0),(1,0),(2,0)])
+
+class Long_Line_H(Block):
+    def __init__(self, surface, pixel_size) -> None:
+        super().__init__(surface, red, pixel_size, [(0,0),(1,0),(2,0),(3,0),(4,0)])
+
+class Short_Line_V(Block):
+    def __init__(self, surface, pixel_size) -> None:
+        super().__init__(surface, red, pixel_size, [(0,0),(0,1),(0,2)])
+
+class Long_Line_V(Block):
+    def __init__(self, surface, pixel_size) -> None:
+        super().__init__(surface, red, pixel_size, [(0,0),(0,1),(0,2),(0,3),(0,4)])
+
