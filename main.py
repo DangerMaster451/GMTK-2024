@@ -9,7 +9,7 @@ clock = pygame.time.Clock()
 running = True
 
 gameBoard = Board(1080, 8)
-s = Short_Line_V(screen, 128)
+s = Single(screen, 128)
 
 while running:
     for event in pygame.event.get():

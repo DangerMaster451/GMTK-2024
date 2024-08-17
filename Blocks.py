@@ -1,6 +1,10 @@
 import pygame
 
-red = pygame.image.load("Assets/redTile.png")
+red_tile = pygame.image.load("Assets/red tile.png")
+blue_tile = pygame.image.load("Assets/blue tile.png")
+yellow_tile = pygame.image.load("Assets/yellow tile.png")
+light_blue_tile = pygame.image.load("Assets/light blue tile.png")
+orange_tile = pygame.image.load("Assets/orange tile.png")
 
 class Block():
     def __init__(self, surface:pygame.Surface, image:pygame.Surface, pixel_size:int, structure:list[tuple[int,int]]) -> None:
@@ -37,21 +41,21 @@ class Block():
 
 class Single(Block):
     def __init__(self, surface, pixel_size) -> None:
-        super().__init__(surface, red, pixel_size, [(0,0)])
+        super().__init__(surface, red_tile, pixel_size, [(0,0)])
 
 class Short_Line_H(Block):
     def __init__(self, surface, pixel_size) -> None:
-        super().__init__(surface, red, pixel_size, [(0,0),(1,0),(2,0)])
+        super().__init__(surface, yellow_tile, pixel_size, [(0,0),(1,0),(2,0)])
 
 class Long_Line_H(Block):
     def __init__(self, surface, pixel_size) -> None:
-        super().__init__(surface, red, pixel_size, [(0,0),(1,0),(2,0),(3,0),(4,0)])
+        super().__init__(surface, blue_tile, pixel_size, [(0,0),(1,0),(2,0),(3,0),(4,0)])
 
 class Short_Line_V(Block):
     def __init__(self, surface, pixel_size) -> None:
-        super().__init__(surface, red, pixel_size, [(0,0),(0,1),(0,2)])
+        super().__init__(surface, orange_tile, pixel_size, [(0,0),(0,1),(0,2)])
 
 class Long_Line_V(Block):
     def __init__(self, surface, pixel_size) -> None:
-        super().__init__(surface, red, pixel_size, [(0,0),(0,1),(0,2),(0,3),(0,4)])
+        super().__init__(surface, light_blue_tile, pixel_size, [(0,0),(0,1),(0,2),(0,3),(0,4)])
 
