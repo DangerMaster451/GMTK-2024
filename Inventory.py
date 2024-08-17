@@ -3,23 +3,23 @@ import pygame
 from Blocks import Single, Short_Line_H, Long_Line_H, Short_Line_V, Long_Line_V
 
 class Inventory(pygame.Surface):
-    def __init__(self, size_x, size_y, blocks):
-        pygame.Surface.__init__(self, (size_x, size_y) )
-
+    def __init__(self, size_x, blocks):
         self.size_x = size_x
-        self.size_y = size_y
         self.block_count = 5
         self.blocks = blocks
 
         self.scale_size = self.size_x/5/self.size_x*1.5
 
-        self.image = pygame.image.load("Assets/fullInvBackground.png")
+        self.tile_size = size_x/self.block_count
 
+        self.image = pygame.transform.scale(pygame.image.load("Assets/InvSlot.png"), (self.tile_size,self.tile_size))
 
+        pygame.Surface.__init__(self, (size_x, self.tile_size) )
 
         #how large the blocks will be in the inventory
     def render(self):
-        self.blit(self.image, (0, 0))
+        for i in range(self.block_count):
+            self.blit(self.image, (i * self.tile_size, 0))
 
         for x in range(0, min(len(self.blocks), self.block_count)):
             if self.blocks[x] == 0:

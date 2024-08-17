@@ -12,7 +12,7 @@ running = True
 gameBoard = Board(720, 3)
 
 blocks = [0,1,2,3,4]
-inventory = Inventory (1080, 216, blocks)
+inventory = Inventory (720, blocks)
 
 while running:
     events = pygame.event.get()
@@ -28,9 +28,9 @@ while running:
     gameBoard.render()
     inventory.render()
 
-    screen.blit(inventory, ((1920 - inventory.size_x)/2, 800))
-    
     screen.blit(gameBoard, ((1920 - gameBoard.pixel_size)/2, 64))
+    screen.blit(inventory, ((1920 - inventory.size_x)/2, 800))
+
     pygame.display.flip()
     clock.tick(60)
 
