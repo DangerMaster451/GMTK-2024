@@ -16,9 +16,6 @@ s = Long_Line_H(screen, 128)
 blocks = [0,1,2,3,4]
 inventory = Inventory (1080, 216, blocks)
 
-inventory.render()
-
-
 while running:
     events = pygame.event.get()
     for event in events:
@@ -31,14 +28,13 @@ while running:
 
     screen.fill("black")
     gameBoard.render()
+    inventory.render()
 
-
-    screen.blit(gameBoard, (420, 0))
     screen.blit(inventory, (0, 0))
     
-    s.render(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1])
     screen.blit(gameBoard, ((1920 - gameBoard.pixel_size)/2, 64))
     s.update(click)
     pygame.display.flip()
-    clock.tick(120)
+    clock.tick(60)
+    
 pygame.quit()
