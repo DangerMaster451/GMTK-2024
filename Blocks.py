@@ -5,9 +5,9 @@ single = pygame.image.load("Assets/Single.png")
 class Block():
     def __init__(self, surface:pygame.Surface, image:pygame.Surface, structure:list[tuple[int,int]]) -> None:
         self.surface = surface
-        self.image = pygame.transform.scale(image, (self.pixel_size,self.pixel_size))
         self.structure = structure
         self.pixel_size = surface.tile_pixel_size
+        self.image = pygame.transform.scale(image, (self.pixel_size,self.pixel_size))
 
     def render(self, rel_x, rel_y) -> None:
         for coord in self.structure:
