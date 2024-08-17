@@ -9,7 +9,7 @@ clock = pygame.time.Clock()
 running = True
 
 gameBoard = Board(1080, 8)
-s = Single(gameBoard)
+s = Single(screen, 128)
 
 while running:
     for event in pygame.event.get():
@@ -19,11 +19,11 @@ while running:
     screen.fill("black")
 
     # RENDER YOUR GAME HERE
+
     gameBoard.render()
-    s.render(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1])
 
     screen.blit(gameBoard, (420, 0))
+    s.render(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1])
     pygame.display.flip()
-
     clock.tick(60)
 pygame.quit()
