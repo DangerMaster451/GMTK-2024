@@ -29,7 +29,7 @@ while running:
     inventory.render()
 
     screen.blit(gameBoard, ((1920 - gameBoard.pixel_size)/2, 64))
-    screen.blit(inventory, ((1920 - inventory.size_x)/2, 840))
+    screen.blit(inventory, ((1920 - inventory.size_x)/2, 820))
 
     pygame.display.flip()
     clock.tick(60)

@@ -36,7 +36,7 @@ class Block():
         for coord in self.structure:
             self.surface.blit(self.image, (self.scale_factor * coord[0] * self.pixel_size + self.position[0] - self.center[0], self.scale_factor * coord[1] * self.pixel_size + self.position[1] - self.center[1]))
         
-    def renderInventory(self, rel_x, rel_y) -> None:
+    def renderInventory(self, rel_x:float, rel_y:float) -> None:
         offset = 1
         previous_x = 0
         for coord in self.structure:
