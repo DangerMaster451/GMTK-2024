@@ -27,7 +27,7 @@ class Tile():
         self.surface = surface
         self.coordinate = coordinate
         self.pixel_size = pixel_size
-        self.image = pygame.transform.scale(pygame.image.load("Assets/stoneTile.png"), (pixel_size,pixel_size))
+        self.image = pygame.transform.scale(pygame.image.load("Assets/InventorySlot.png"), (pixel_size,pixel_size))
 
     def render(self):
         x = self.coordinate[0] * self.pixel_size

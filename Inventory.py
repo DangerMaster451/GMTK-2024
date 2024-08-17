@@ -61,6 +61,7 @@ class InventorySlot():
         self.surface.blit(image, self.coordinate)
 
         if self.isClicked(click):
+            # reset slot
             self.surface.slots[self.index] = InventorySlot(self.surface, (self.index * self.surface.tile_size, 0), self.surface.tile_size, self.index, 0, self.surface.size_x)
 
 

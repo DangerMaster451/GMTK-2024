@@ -7,12 +7,15 @@ import pygame
 pygame.init()
 screen = pygame.display.set_mode((1920, 1080), pygame.RESIZABLE | pygame.SCALED)
 clock = pygame.time.Clock()
+bg = pygame.image.load("Assets/Background.png")
 running = True
 
 gameBoard = Board(720, 5)
 
 blocks = [1,2,3]
 inventory = Inventory (720, blocks)
+
+dragged_item = None
 
 while running:
     events = pygame.event.get()
@@ -24,7 +27,7 @@ while running:
         else:
             click = False
 
-    screen.fill("black")
+    screen.blit(bg, (0,0))
     gameBoard.render()
     inventory.render(click)
 
