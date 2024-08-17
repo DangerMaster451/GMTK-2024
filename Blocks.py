@@ -11,10 +11,10 @@ class Block():
         self.center = self.calculate_center()
 
     def render(self, rel_x, rel_y) -> None:
+        self.calculate_center()
         for coord in self.structure:
-            self.surface.blit(self.image, (coord[0] * self.pixel_size + rel_x, coord[1] * self.pixel_size + rel_y))
-            self.calculate_center()
-            pygame.draw.circle(self.surface, "green", (self.center[0] + rel_x , self.center[1] + rel_y), 12)
+            self.surface.blit(self.image, (coord[0] * self.pixel_size + rel_x - self.center[0], coord[1] * self.pixel_size + rel_y - self.center[1]))
+        #pygame.draw.circle(self.surface, "green", (self.center[0] + rel_x , self.center[1] + rel_y), 12)
             
     def calculate_center(self) -> tuple[int,int]:
         smallest_x = self.structure[0][0]
@@ -37,4 +37,4 @@ class Block():
 
 class Single(Block):
     def __init__(self, surface, pixel_size) -> None:
-        super().__init__(surface, single, pixel_size, [(0,0),(1,0),(0,1),(1,1),(2,1),(0,2)])
+        super().__init__(surface, single, pixel_size, [(0,0),(0,1),(1,0),(1,1),(0,3)])
