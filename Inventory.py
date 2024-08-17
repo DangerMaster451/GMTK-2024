@@ -47,8 +47,6 @@ class InventorySlot():
         else:
             image = self.default_image
 
-        
-
         if self.block == 0:
             pass
         elif self.block == 1:
