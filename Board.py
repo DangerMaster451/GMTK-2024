@@ -27,9 +27,9 @@ class Tile():
         self.surface = surface
         self.coordinate = coordinate
         self.pixel_size = pixel_size
+        self.image = pygame.transform.scale(pygame.image.load("Assets/Tile.png"), (pixel_size,pixel_size))
 
     def render(self):
-        size = self.pixel_size
-        rect = pygame.Rect(self.coordinate[0]*size-0+5, self.coordinate[1]*size+5, size-5, size-5)
-        pygame.draw.rect(self.surface, "red", rect)
-
+        x = self.coordinate[0] * self.pixel_size
+        y = self.coordinate[1] * self.pixel_size
+        self.surface.blit(self.image, (x,y))

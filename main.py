@@ -1,9 +1,5 @@
 from Board import Board
 
-
-
-
-
 import pygame
 
 pygame.init()
@@ -12,8 +8,6 @@ clock = pygame.time.Clock()
 running = True
 
 gameBoard = Board(1080, 3)
-
-
 
 while running:
     for event in pygame.event.get():
