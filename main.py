@@ -11,7 +11,7 @@ clock = pygame.time.Clock()
 running = True
 
 gameBoard = Board(1080, 8)
-s = Long_Line_H(screen, 128, 0.2)
+s = Long_Line_H(screen, 128)
 
 blocks = [0,1,2,3,4]
 inventory = Inventory (1080, 216, blocks)
