@@ -6,6 +6,7 @@ class Board(pygame.Surface):
 
         self.grid_size = grid_size
         self.tiles = []
+        self.pixel_size = pixel_size
 
         # calculate pixel size of tiles
         self.tile_pixel_size = pixel_size/grid_size
