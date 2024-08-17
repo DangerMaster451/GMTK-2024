@@ -9,9 +9,9 @@ screen = pygame.display.set_mode((1920, 1080), pygame.RESIZABLE | pygame.SCALED)
 clock = pygame.time.Clock()
 running = True
 
-gameBoard = Board(720, 3)
+gameBoard = Board(720, 5)
 
-blocks = [0,1,2,3,4,5]
+blocks = [1,2,3]
 inventory = Inventory (720, blocks)
 
 while running:
@@ -26,7 +26,7 @@ while running:
 
     screen.fill("black")
     gameBoard.render()
-    inventory.render()
+    inventory.render(click)
 
     screen.blit(gameBoard, ((1920 - gameBoard.pixel_size)/2, 64))
     screen.blit(inventory, ((1920 - inventory.size_x)/2, 820))
