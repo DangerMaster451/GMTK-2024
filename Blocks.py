@@ -40,8 +40,8 @@ class Block():
         offset = 1
         previous_x = 0
         for coord in self.structure:
-            x = round(self.scale_factor * coord[0] * self.pixel_size + rel_x)
-            y = round(self.scale_factor * coord[1] * self.pixel_size + rel_y)
+            x = self.scale_factor * coord[0] * self.pixel_size + rel_x
+            y = self.scale_factor * coord[1] * self.pixel_size + rel_y
             if(offset != 1):
                 if(x == previous_x):
                     y -= offset
