@@ -1,13 +1,18 @@
 import pygame
 import math
 
+from Inventory import Inventory
+from Blocks import *
+
 class Board(pygame.Surface):
-    def __init__(self, pixel_size:int, grid_size:int) -> None:
+    def __init__(self, pixel_size:int, grid_size:int, inventory:Inventory) -> None:
         pygame.Surface.__init__(self, (pixel_size, pixel_size))
 
         self.grid_size = grid_size
         self.tiles = []
         self.pixel_size = pixel_size
+        self.inventory = inventory
+        self.select_structure = []
 
         # calculate pixel size of tiles
         self.tile_pixel_size = pixel_size/grid_size
@@ -29,15 +34,46 @@ class Tile():
         self.pixel_size = pixel_size
         self.default_image = pygame.transform.scale(pygame.image.load("Assets/InventorySlot.png"), (pixel_size,pixel_size))
         self.hovered_image = pygame.transform.scale(pygame.image.load("Assets/HoverInvSlot.png"), (pixel_size,pixel_size))
+        self.highlighted_image = pygame.transform.scale(pygame.image.load("Assets/red tile.png"), (pixel_size,pixel_size))
         self.real_point = ((1920 - self.surface.pixel_size)/2 + self.coordinate[0] * self.surface.tile_pixel_size + self.surface.tile_pixel_size/2,
                            (1080 - self.surface.pixel_size)/2 + self.coordinate[1] * self.surface.tile_pixel_size)
 
     def render(self):
         if self.isHovered():
-            image = self.hovered_image
+            selected_item = self.surface.inventory.selected_tile
+            if selected_item != None:
+                block_type_index = self.surface.inventory.slots[selected_item].block
+
+                self.surface.select_structure = []
+                if block_type_index == 1:
+                    for block in Single.structure: 
+                        self.surface.select_structure.append([block[0] + self.coordinate[0], block[1] + self.coordinate[1]])
+                elif block_type_index == 2:
+                    for block in Short_Line_H.structure: 
+                        self.surface.select_structure.append([block[0] + self.coordinate[0], block[1] + self.coordinate[1]])
+                elif block_type_index == 3:
+                    for block in Long_Line_H.structure: 
+                        self.surface.select_structure.append([block[0] + self.coordinate[0], block[1] + self.coordinate[1]])
+                elif block_type_index == 4:
+                    for block in Short_Line_V.structure: 
+                        self.surface.select_structure.append([block[0] + self.coordinate[0], block[1] + self.coordinate[1]])
+                elif block_type_index == 5:
+                    for block in Long_Line_V.structure: 
+                        self.surface.select_structure.append([block[0] + self.coordinate[0], block[1] + self.coordinate[1]])
+                
+                if [self.coordinate[0], self.coordinate[1]] in self.surface.select_structure:
+                    image = self.highlighted_image
+                else:
+                    image = self.hovered_image
+            else:
+                image = self.hovered_image
+                    
+            
+        elif [self.coordinate[0], self.coordinate[1]] in self.surface.select_structure:
+            image = self.highlighted_image
+
         else:
             image = self.default_image
-
 
         x = self.coordinate[0] * self.pixel_size
         y = self.coordinate[1] * self.pixel_size

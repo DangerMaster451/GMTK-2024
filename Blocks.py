@@ -72,24 +72,29 @@ class Block():
         return center
 
 class Single(Block):
+    structure = [(0,0)]
     def __init__(self, surface, pixel_size, scale_factor=1) -> None:
-        super().__init__(surface, red_tile, pixel_size, [(0,0)], scale_factor)
+        super().__init__(surface, red_tile, pixel_size, Single.structure, scale_factor)
 
 class Short_Line_H(Block):
+    structure = [(0,0),(1,0),(2,0)]
     def __init__(self, surface, pixel_size, scale_factor=1) -> None:
-        super().__init__(surface, yellow_tile, pixel_size, [(0,0),(1,0),(2,0)], scale_factor)
+        super().__init__(surface, yellow_tile, pixel_size, Short_Line_H.structure, scale_factor)
 
 class Long_Line_H(Block):
+    structure = [(0,0),(1,0),(2,0),(3,0),(4,0)]
     def __init__(self, surface, pixel_size, scale_factor=1) -> None:
-        super().__init__(surface, blue_tile, pixel_size, [(0,0),(1,0),(2,0),(3,0),(4,0)], scale_factor)
+        super().__init__(surface, blue_tile, pixel_size, Long_Line_H.structure, scale_factor)
 
 class Short_Line_V(Block):
+    structure = [(0,0),(0,1),(0,2)]
     def __init__(self, surface, pixel_size, scale_factor=1) -> None:
-        super().__init__(surface, orange_tile, pixel_size, [(0,0),(0,1),(0,2)], scale_factor)
+        super().__init__(surface, orange_tile, pixel_size, Short_Line_V.structure, scale_factor)
 
 class Long_Line_V(Block):
+    structure = [(0,0),(0,1),(0,2),(0,3),(0,4)]
     def __init__(self, surface, pixel_size, scale_factor=1) -> None:
-        super().__init__(surface, light_blue_tile, pixel_size, [(0,0),(0,1),(0,2),(0,3),(0,4)], scale_factor)
+        super().__init__(surface, light_blue_tile, pixel_size, Long_Line_V.structure, scale_factor)
 
 class Test(Block):
     def __init__(self, surface, pixel_size) -> None:

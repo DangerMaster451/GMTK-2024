@@ -10,12 +10,10 @@ clock = pygame.time.Clock()
 bg = pygame.image.load("Assets/Background.png")
 running = True
 
-gameBoard = Board(720, 3)
 
-blocks = [1,2,3,4]
+blocks = [1,2,3,4,5]
 inventory = Inventory (720, blocks)
-
-dragged_item = None
+gameBoard = Board(720, 7, inventory)
 
 while running:
     events = pygame.event.get()
