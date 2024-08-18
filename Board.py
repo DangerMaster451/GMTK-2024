@@ -34,7 +34,6 @@ class Tile():
         self.pixel_size = pixel_size
         self.default_image = pygame.transform.scale(pygame.image.load("Assets/InventorySlot.png"), (pixel_size,pixel_size))
         self.hovered_image = pygame.transform.scale(pygame.image.load("Assets/HoverInvSlot.png"), (pixel_size,pixel_size))
-        self.highlighted_image = pygame.transform.scale(pygame.image.load("Assets/red tile.png"), (pixel_size,pixel_size))
         self.real_point = ((1920 - self.surface.pixel_size)/2 + self.coordinate[0] * self.surface.tile_pixel_size + self.surface.tile_pixel_size/2,
                            (1080 - self.surface.pixel_size)/2 + self.coordinate[1] * self.surface.tile_pixel_size)
 
@@ -48,30 +47,39 @@ class Tile():
                 if block_type_index == 1:
                     for block in Single.structure: 
                         self.surface.select_structure.append([block[0] + self.coordinate[0], block[1] + self.coordinate[1]])
+                        image = pygame.transform.scale(Single.image,(self.pixel_size,self.pixel_size))
                 elif block_type_index == 2:
                     for block in Short_Line_H.structure: 
                         self.surface.select_structure.append([block[0] + self.coordinate[0], block[1] + self.coordinate[1]])
+                        image = pygame.transform.scale(Short_Line_H.image,(self.pixel_size,self.pixel_size))
                 elif block_type_index == 3:
                     for block in Long_Line_H.structure: 
                         self.surface.select_structure.append([block[0] + self.coordinate[0], block[1] + self.coordinate[1]])
+                        image = pygame.transform.scale(Long_Line_H.image,(self.pixel_size,self.pixel_size))
                 elif block_type_index == 4:
                     for block in Short_Line_V.structure: 
                         self.surface.select_structure.append([block[0] + self.coordinate[0], block[1] + self.coordinate[1]])
+                        image = pygame.transform.scale(Short_Line_V.image,(self.pixel_size,self.pixel_size))
                 elif block_type_index == 5:
                     for block in Long_Line_V.structure: 
                         self.surface.select_structure.append([block[0] + self.coordinate[0], block[1] + self.coordinate[1]])
-                
-                if [self.coordinate[0], self.coordinate[1]] in self.surface.select_structure:
-                    image = self.highlighted_image
-                else:
-                    image = self.hovered_image
+                        image = pygame.transform.scale(Long_Line_V.image,(self.pixel_size,self.pixel_size))
             else:
                 image = self.hovered_image
                     
-            
         elif [self.coordinate[0], self.coordinate[1]] in self.surface.select_structure:
-            image = self.highlighted_image
-
+            selected_item = self.surface.inventory.selected_tile
+            block_type_index = self.surface.inventory.slots[selected_item].block
+            if block_type_index == 1:
+                image = pygame.transform.scale(Single.image,(self.pixel_size,self.pixel_size))
+            elif block_type_index == 2:
+                image = pygame.transform.scale(Short_Line_H.image,(self.pixel_size,self.pixel_size))
+            elif block_type_index == 3:
+                image = pygame.transform.scale(Long_Line_H.image,(self.pixel_size,self.pixel_size))
+            elif block_type_index == 4:
+                image = pygame.transform.scale(Short_Line_V.image,(self.pixel_size,self.pixel_size))
+            elif block_type_index == 5:
+                image = pygame.transform.scale(Long_Line_V.image,(self.pixel_size,self.pixel_size))
         else:
             image = self.default_image
 
