@@ -26,7 +26,7 @@ while running:
             click = False
 
     screen.blit(bg, (0,0))
-    gameBoard.render()
+    gameBoard.render(click)
     inventory.render(click)
 
     screen.blit(gameBoard, ((1920 - gameBoard.pixel_size)/2, 64))
