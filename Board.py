@@ -27,6 +27,23 @@ class Board(pygame.Surface):
         for tile in self.tiles:
             tile.render(click)
 
+    def check_fit(self, structure, block_index) -> None:
+        print("check")
+        for entry in structure:
+            if entry[0] >= self.grid_size or entry[1] >= self.grid_size:
+                print("fail")
+                return
+            for tile in self.tiles:
+                if tile.coordinate[0] == entry[0] and tile.coordinate[1] == entry[1] and tile.state != 0:
+                    print("fail")
+                    return
+        
+        print("success")
+        for entry in structure:
+            for tile in self.tiles:
+                if tile.coordinate[0] == entry[0] and tile.coordinate[1] == entry[1]:
+                    tile.state = block_index
+
 class Tile():
     def __init__(self, surface:pygame.Surface, coordinate:tuple[int,int], pixel_size:int):
         self.surface = surface
@@ -38,7 +55,7 @@ class Tile():
                            (1080 - self.surface.pixel_size)/2 + self.coordinate[1] * self.surface.tile_pixel_size)
         self.state = 0 # blank
 
-    def render(self, click):
+    def render(self, click) -> None:
         if self.isHovered():
             selected_item = self.surface.inventory.selected_tile
             if selected_item != None:
@@ -68,8 +85,8 @@ class Tile():
             else:
                 image = self.hovered_image
 
-            if click and self.state == 0:
-                self.state = block_type_index
+            if click:
+                self.surface.check_fit(self.surface.select_structure, block_type_index)
                     
         elif [self.coordinate[0], self.coordinate[1]] in self.surface.select_structure or self.state != 0:
             selected_item = self.surface.inventory.selected_tile
@@ -88,20 +105,12 @@ class Tile():
                 image = pygame.transform.scale(Short_Line_V.image,(self.pixel_size,self.pixel_size))
             elif block_type_index == 5:
                 image = pygame.transform.scale(Long_Line_V.image,(self.pixel_size,self.pixel_size))
-
-            if click and self.state == 0:
-                self.state = block_type_index
         else:
             image = self.default_image
-
-        
-
 
         x = self.coordinate[0] * self.pixel_size
         y = self.coordinate[1] * self.pixel_size
         self.surface.blit(image, (x,y))
-
-
 
     def isHovered(self) -> bool:
         if math.sqrt((self.real_point[0] - pygame.mouse.get_pos()[0])**2 + (self.real_point[1] - pygame.mouse.get_pos()[1])**2) < self.pixel_size/2:
