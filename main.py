@@ -1,6 +1,7 @@
 from Board import Board
 from Inventory import Inventory
 from Blocks import *
+from Level import Level
 
 import pygame
 
@@ -11,9 +12,10 @@ bg = pygame.image.load("Assets/Background.png")
 running = True
 
 
-blocks = [1,2,3,4,5]
-inventory = Inventory (720, blocks)
-gameBoard = Board(720, 7, inventory)
+level1 = Level(3,[0,1,1,1,1,1,1,1,1,1])
+
+inventory = Inventory (720, level1.inventory)
+gameBoard = Board(720, level1.grid_size, inventory)
 
 while running:
     events = pygame.event.get()

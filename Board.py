@@ -28,14 +28,11 @@ class Board(pygame.Surface):
             tile.render(click)
 
     def check_fit(self, structure, block_index) -> None:
-        print("check")
         for entry in structure:
             if entry[0] >= self.grid_size or entry[1] >= self.grid_size:
-                print("fail")
                 return
             for tile in self.tiles:
                 if tile.coordinate[0] == entry[0] and tile.coordinate[1] == entry[1] and tile.state != 0:
-                    print("fail")
                     return
         
         print("success")
